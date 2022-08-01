@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.jiangzh.course</groupId>
+    <artifactId>dubbo-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <!-- 增加packaging类型 -->
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>dubbo-demo</module>
+        <module>dubbo-producer</module>
+        <module>dubbo-consumer</module>
+        <module>dubbo-service</module>
+    </modules>
+
+    <name>dubbo_3_study</name>
+    <description>dubbo_3学习</description>
+    <properties>
+        <java.version>1.8</java.version>
+        <!-- 增加dubbo版本号控制 -->
+<!--        <dubbo.version>3.0.0.preview</dubbo.version>-->
+        <dubbo.version>3.0.1</dubbo.version>
+        <curator.version>4.3.0</curator.version>
+    </properties>
+
+    <!-- 父工程不进行依赖包引入，会对子工程产生影响 -->
+    <!--
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    -->
+
+    <!-- 父工程做依赖包的管理 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- 增加dubbo依赖包管理 -->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-dependencies-zookeeper</artifactId>
+                <version>${dubbo.version}</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.zookeeper</groupId>
+                <artifactId>zookeeper</artifactId>
+                <version>3.7.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-framework</artifactId>
+                <version>${curator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 移除springboot的打包管理，后续在子工程中进行单独处理 -->
+    <!--
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+    -->
+
+</project>
